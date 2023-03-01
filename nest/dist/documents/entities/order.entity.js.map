@@ -1,0 +1,1 @@
+{"version":3,"file":"order.entity.js","sourceRoot":"","sources":["../../../src/documents/entities/order.entity.ts"],"names":[],"mappings":";;;;;;;;;AAAA,+DAAwE;AACxE,uDAA6C;AAOtC,IAAM,KAAK,GAAX,MAAM,KAAM,SAAQ,0BAAQ;CAAG,CAAA;AAAzB,KAAK;IALjB,IAAA,mCAAY,EAAC,GAAG,EAAE,CAAC,CAAC;QACjB,KAAK,EAAE;YACH,IAAI,EAAE,OAAO;SAChB;KACJ,CAAC,CAAC;GACU,KAAK,CAAoB;AAAzB,sBAAK"}

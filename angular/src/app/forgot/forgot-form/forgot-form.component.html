@@ -1,0 +1,25 @@
+<form class="app-form" [formGroup]="forgotForm" (ngSubmit)="onSubmit()">
+  <div class="app-form__controls">
+    <app-form-field>
+      <label for="email">We'll send a recovery link to</label>
+      <input
+        id="email"
+        type="text"
+        name="email"
+        spellcheck="false"
+        autocapitalize="off"
+        autofocus="autofocus"
+        placeholder="Enter email"
+        autocomplete="username"
+        formControlName="email"
+      />
+      <app-form-field-error *ngIf="email && email.touched && email.invalid">
+        Invalid email.
+      </app-form-field-error>
+    </app-form-field>
+
+    <button [disabled]="forgotForm.invalid || isLoading">
+      {{ isLoading ? "Waiting..." : "Send recovery link" }}
+    </button>
+  </div>
+</form>

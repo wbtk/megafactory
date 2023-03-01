@@ -1,0 +1,20 @@
+import DocumentPermissions from "./document.permissions.enum";
+import OrderPermissions from "./order.permissions.enum";
+import InvoicePermissions from "./invoice.permissions.enum";
+export declare const permissions: {
+    Invoice: InvoicePermissions.Invoice;
+    ListInvoice: InvoicePermissions.ListInvoice;
+    ViewInvoice: InvoicePermissions.ViewInvoice;
+    CreateInvoice: InvoicePermissions.CreateInvoice;
+    UpdateInvoice: InvoicePermissions.UpdateInvoice;
+    DeleteInvoice: InvoicePermissions.DeleteInvoice;
+    CommiteInvoice: InvoicePermissions.CommiteInvoice;
+    Order: OrderPermissions.Order;
+    ListOrder: OrderPermissions.ListOrder;
+    ViewOrder: OrderPermissions.ViewOrder;
+    CreateOrder: OrderPermissions.CreateOrder;
+    UpdateOrder: OrderPermissions.UpdateOrder;
+    DeleteOrder: OrderPermissions.DeleteOrder;
+    CommiteOrder: OrderPermissions.CommiteOrder;
+    ListDocument: DocumentPermissions.ListDocument;
+};

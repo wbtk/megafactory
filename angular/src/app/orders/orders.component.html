@@ -1,0 +1,111 @@
+<div class="md:flex">
+    <div class="md:flex-none md:fixed md:left-0 md:top-0 md:h-screen md:w-64">
+        <app-navigation></app-navigation>
+    </div>
+    <div class="md:flex-1 md:ml-64">
+        <app-header [title]="'Заказы'"></app-header>
+        <app-main>
+          <mat-tab-group>
+            <mat-tab label="Заказы">
+              <div class="my-5 overflow-auto" style="width:99%;">
+                <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="w-full">
+
+                  <!-- Checkbox Column -->
+                  <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                                    [checked]="selection.hasValue() && isAllSelected()"
+                                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                    [aria-label]="checkboxLabel()">
+                      </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                      <mat-checkbox (click)="$event.stopPropagation()"
+                                    (change)="$event ? selection.toggle(row) : null"
+                                    [checked]="selection.isSelected(row)"
+                                    [aria-label]="checkboxLabel(row)">
+                      </mat-checkbox>
+                    </td>
+                  </ng-container>
+                
+                  <!-- NUMBER Column -->
+                  <ng-container matColumnDef="number" sticky>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">№</th>
+                      <td mat-cell *matCellDef="let element">{{element.number}}</td>
+                  </ng-container>
+  
+                  <!-- BRAND Column -->
+                  <ng-container matColumnDef="brand">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by brand">Бренд</th>
+                    <td mat-cell *matCellDef="let element">{{element.brand}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="contractor">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by brand">Клиент</th>
+                    <td mat-cell *matCellDef="let element">{{element.contractor}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="preview">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by brand">Фото</th>
+                    <td mat-cell *matCellDef="let element">{{element.preview}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="count">
+                    <th class="whitespace-nowrap" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by brand">Кол-во</th>
+                    <td mat-cell *matCellDef="let element">{{element.count}}</td>
+                  </ng-container>
+  
+                  <!-- NUMBER Column -->
+                  <ng-container matColumnDef="creator">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by creator">Создал</th>
+                      <td mat-cell *matCellDef="let element">{{element.creator.lastname}} {{element.creator.firstname}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="progress">
+                    <th class="whitespace-nowrap" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by brand">Ход выполнения</th>
+                    <td mat-cell *matCellDef="let element">{{element.progress}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="statuses">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status_payment">Статусы</th>
+                    <td mat-cell *matCellDef="let element">{{element.statuses}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by amount">Стоимость</th>
+                    <td mat-cell *matCellDef="let element">{{element.amount}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="delivery">
+                    <th class="whitespace-nowrap" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by amount">Дата отгрузки</th>
+                    <td mat-cell *matCellDef="let element">{{element.delivery}}</td>
+                  </ng-container>
+                
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                  </tr>
+                </table>
+  
+                <mat-paginator class="mt-5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+              </div>
+              
+            </mat-tab>
+            <mat-tab label="Карты заказов">
+              <div></div>
+            </mat-tab>
+            <mat-tab label="Печать">
+              <div></div>
+            </mat-tab>
+            <mat-tab label="Кашировка">
+              <div></div>
+            </mat-tab>
+            <mat-tab label="Высечка">
+              <div></div>
+            </mat-tab>
+            <mat-tab label="Склейка">
+              <div></div>
+            </mat-tab>
+          </mat-tab-group>
+        </app-main>
+    </div>
+</div>

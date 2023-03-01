@@ -1,0 +1,23 @@
+<div class="md:flex">
+  <div class="md:flex-none md:fixed md:left-0 md:top-0 md:h-screen md:w-64">
+      <app-navigation></app-navigation>
+  </div>
+  <div class="md:flex-1 md:ml-64">
+    <ng-container *ngIf="isLoading$ | async as isLoading; else loadingComplete">
+      <app-header [title]="title"></app-header>
+    </ng-container>
+    <ng-template #loadingComplete>
+      <app-header [title]="title"></app-header>
+      <app-main>
+        <ng-container *ngIf="entityItem | async as entityItem;">
+          <ng-container *ngIf="entityItem.id; else create;">
+            <app-entity-item-form-update [entityItem]="entityItem"></app-entity-item-form-update>
+          </ng-container>
+          <ng-template #create>
+            <app-entity-item-form-create></app-entity-item-form-create>
+          </ng-template>
+        </ng-container>
+      </app-main>
+    </ng-template>
+  </div>
+</div>

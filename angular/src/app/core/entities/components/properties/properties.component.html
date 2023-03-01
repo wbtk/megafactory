@@ -1,0 +1,9 @@
+<div class="w-full py-4 px-4">
+  <button mat-stroked-button (click)="createProperty()">Добавить поле</button>
+  <div class="my-4 properties">
+    <mat-accordion>
+      <app-property *ngFor="let property of properties" [property]="property" (delete)="onDelete()"></app-property>
+    </mat-accordion>
+  </div>
+</div>
+

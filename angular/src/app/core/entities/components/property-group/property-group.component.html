@@ -1,0 +1,29 @@
+<mat-card class="mt-5">
+  <mat-card-header class="w-1/2">
+    <form [formGroup]="entityGroupForm" class="w-full">
+      <mat-card-title>
+        <mat-form-field class="w-full">
+          <input matInput formControlName="name" placeholder="Название группы свойств" />
+        </mat-form-field>
+      </mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>      
+    </form>
+  </mat-card-header>
+
+  <app-properties [propertyGroupId]="propertyGroup.id"></app-properties>
+  
+  <mat-card-actions align="end">
+    
+    <button (click)="onSave()" [disabled]="isLoading" mat-button>
+      <mat-icon>save</mat-icon>
+      <ng-container *ngIf="isLoading then saving else save"></ng-container>
+      <ng-template #saving>
+        Сохранение...
+      </ng-template>
+      <ng-template #save>
+        Сохранить
+      </ng-template>
+    </button>
+    <button (click)="onDelete()" mat-button><mat-icon>delete</mat-icon> Удалить</button>
+  </mat-card-actions>
+</mat-card>

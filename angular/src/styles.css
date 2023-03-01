@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+nav{
+  background: #5C7480;
+}
+nav a{
+  color: white;
+  display: block;
+  margin-bottom: 5px;
+}
+nav a.active{
+  color: white !important;
+  background-color: #6c8b9b;
+}
+.mdc-button__label{
+  letter-spacing: 0 !important;
+}
+.entity-search-input div.mat-mdc-form-field-subscript-wrapper{
+  display: none !important;
+}
+.mat-accordion .mat-expansion-panel:last-of-type {
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+}
+.mat-accordion .mat-expansion-panel:first-of-type {
+  border-top-right-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+}

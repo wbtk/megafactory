@@ -1,0 +1,19 @@
+<form [formGroup]="entityItemForm" (ngSubmit)="onSubmit()" class="w-1/2 mb-8 flex flex-col">
+  <mat-form-field>
+    <mat-label>Название элемента справочника</mat-label>
+    <input matInput formControlName="name" placeholder="Название элемента справочника" />
+  </mat-form-field>
+
+  <button class="w-32" [disabled]="isLoading" type="submit" mat-flat-button color="primary">
+    <ng-container *ngIf="isLoading then saving else save"></ng-container>
+    <ng-template #saving>
+      Сохранение...
+    </ng-template>
+    <ng-template #save>
+      Сохранить
+    </ng-template>
+  </button>
+</form>
+<div class="extra_fields">
+  
+</div>

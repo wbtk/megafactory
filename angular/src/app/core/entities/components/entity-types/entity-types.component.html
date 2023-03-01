@@ -1,0 +1,20 @@
+<div class="md:flex">
+  <div class="md:flex-none md:fixed md:left-0 md:top-0 md:h-screen md:w-64">
+      <app-navigation></app-navigation>
+  </div>
+  <div class="md:flex-1 md:ml-64">
+    <ng-container *ngIf="isLoading else loadingComplete">
+      <app-header [title]="'Загружется'"></app-header>
+    </ng-container>
+    <ng-template #loadingComplete>
+      <app-header [title]="'Справочники'"></app-header>
+    </ng-template>
+    <app-main>
+      <app-entity-list [dataSource]="dataSource"  
+                       (deleteSelected)="onDeleteSelected($event)"
+                       linkToCreateEntity="entity-type"
+                       linkToEntity="/core/entities/entity-type/">
+      </app-entity-list>
+    </app-main>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<form [formGroup]="entityTypeForm" (ngSubmit)="onSubmit()" class="w-1/2 flex flex-col">
+    <mat-form-field>
+      <mat-label>Название справочника</mat-label>
+      <input matInput formControlName="name" placeholder="Название справочника" value="" />
+    </mat-form-field>
+    <button class="w-32" [disabled]="isLoading" type="submit" mat-raised-button color="primary">
+      <ng-container *ngIf="isLoading then saving else save"></ng-container>
+      <ng-template #saving>
+        Создание...
+      </ng-template>
+      <ng-template #save>
+        Создать
+      </ng-template>
+    </button>
+</form>

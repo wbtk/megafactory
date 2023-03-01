@@ -1,0 +1,89 @@
+<div class="flex items-center justify-between w-full py-6 pt-0">
+  <div>
+    <a [routerLink]="['/core/entities/entity-type/'+entityTypeId+'/entity-item/create']"  mat-raised-button color="primary" class="mr-3">
+      <mat-icon>add</mat-icon> Создать
+    </a>
+    <button mat-raised-button color="primary" (click)="onDeleteSelected()" [disabled]="!selection.selected.length">
+      <mat-icon>delete</mat-icon> Удалить
+    </button>
+  </div>
+  <div>
+    <mat-form-field class="entity-search-input">
+        <mat-label>Поиск</mat-label>
+        <input matInput type="text" [(ngModel)]="search" (keyup)="applyFilter()" autocomplete="off" #input />
+        <button *ngIf="search" matSuffix mat-icon-button aria-label="Clear" (click)="search='';applyFilter()">
+          <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+  </div>
+</div>
+
+<div>
+  <table mat-table [dataSource]="entityItems" matSort>
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th class="w-8" mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sort">
+      <th class="w-28" mat-header-cell *matHeaderCellDef mat-sort-header>Порядок</th>
+      <td mat-cell *matCellDef="let row">{{row.sort}}</td>
+    </ng-container>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th class="w-28" mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Название</th>
+      <td mat-cell *matCellDef="let row">
+        <a class="block w-full" href="" 
+        [routerLink]="['/core/entities/entity-type/' + row.entityTypeId + '/entity-item/edit/' + row.id]">
+          {{row.name}}
+        </a>
+      </td>
+    </ng-container>
+    
+    <!-- Star Column -->
+    <ng-container matColumnDef="actions" stickyEnd>
+      <th class="w-28" mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+        <mat-menu #menu="matMenu">
+          <a [routerLink]="['/core/entities/entity-type/' + element.entityTypeId + '/entity-item/edit/' + element.id]" mat-menu-item>
+            <small>Редактировать</small>
+          </a>
+          <button mat-menu-item (click)="onDelete(element);"><small>Удалить</small></button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell py-3" colspan="4">Нет данных для отображения</td>
+    </tr>
+    
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Выбрать"></mat-paginator>
+</div>

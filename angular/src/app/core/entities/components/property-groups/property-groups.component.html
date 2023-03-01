@@ -1,0 +1,6 @@
+<h2 class="text-2xl font-medium mb-5">Дополнительные поля</h2>
+<button mat-stroked-button (click)="onSubmit()">Добавить группу полей</button>
+<app-property-group *ngFor="let propertyGroup of propertyGroups"
+                    (delete)="onDelete()" 
+                    [propertyGroup]="propertyGroup">
+</app-property-group>

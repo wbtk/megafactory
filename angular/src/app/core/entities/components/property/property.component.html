@@ -1,0 +1,97 @@
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{propertyForm.value.name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{propertyForm.value.description}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    
+    <form [formGroup]="propertyForm" class="grid gap-4 grid-cols-2">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Название поля</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Описание поля</mat-label>
+        <input matInput formControlName="description" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Тип поля</mat-label>
+        <mat-select formControlName="dataType">
+          <mat-option value="text">Текст</mat-option>
+          <mat-option value="integer">Число</mat-option>
+          <mat-option value="json">Json</mat-option>
+          <mat-option value="relation">Связь</mat-option>
+          <mat-option value="options">Опции</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <mat-form-field *ngIf="propertyForm.value.dataType === 'relation'" class="w-full" appearance="fill">
+          <mat-label>ID справочника</mat-label>
+          <input type="number" matInput formControlName="relationTypeId" />
+        </mat-form-field>
+        <mat-form-field *ngIf="propertyForm.value.dataType === 'options'" class="w-full" appearance="fill">
+          <mat-label>Опции</mat-label>
+          <textarea matInput formControlName="options"></textarea>
+        </mat-form-field>
+        <mat-form-field *ngIf="propertyForm.value.dataType === 'json'" class="w-full" appearance="fill">
+          <mat-label>JSON шаблон поля</mat-label>
+          <textarea matInput formControlName="json"></textarea>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Форма вывода</mat-label>
+        <mat-select formControlName="formType">
+          <mat-option value="string">Строка</mat-option>
+          <mat-option value="text">Текст</mat-option>
+          <mat-option value="integer">Число</mat-option>
+          <mat-option value="price">Цена</mat-option>
+          <mat-option value="image">Изображение</mat-option>
+          <mat-option value="dropdown">Выпадающий список</mat-option>
+          <mat-option value="json">Json</mat-option>
+          <mat-option value="checkbox">Чекбокс</mat-option>
+          <mat-option value="radio">Радио</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+
+      </div>
+
+      <mat-checkbox formControlName="active">Активное</mat-checkbox>
+      <mat-checkbox formControlName="required">Обязательное</mat-checkbox>
+      <mat-checkbox formControlName="visible">Видимое</mat-checkbox>
+      <mat-checkbox formControlName="searchable">Участвует в поиске</mat-checkbox>
+      <mat-checkbox formControlName="sortable" >Участвует в сортировке</mat-checkbox>
+      <mat-checkbox formControlName="multiple">Множественное</mat-checkbox>
+
+    </form>
+
+    <mat-action-row>
+      <button mat-button color="primary" (click)="onSubmit()">
+        <mat-icon>save</mat-icon> 
+        <ng-container *ngIf="!isLoading; else saving">
+          Сохранить
+        </ng-container>
+        <ng-template #saving>
+          Сохранение...
+        </ng-template>
+      </button>
+      <button mat-button color="primary" (click)="onDelete()">
+        <mat-icon>delete</mat-icon> 
+        <ng-container *ngIf="!isLoading; else saving">
+          Удалить
+        </ng-container>
+        <ng-template #saving>
+          Удаление...
+        </ng-template>
+      </button>
+    </mat-action-row>
+  
+  </mat-expansion-panel>
